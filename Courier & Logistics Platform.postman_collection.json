@@ -1,0 +1,1475 @@
+{
+  "info": {
+    "_postman_id": "7709419d-c68e-41b2-b084-a376a19d7f07",
+    "name": "Courier & Logistics Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33525441",
+    "_collection_link": "https://go.postman.co/collection/33525441-7709419d-c68e-41b2-b084-a376a19d7f07?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "user register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"omit mia\",\r\n    \"email\": \"naimulislamomit548@gmail.com\",\r\n    \"password\": \"Pt!12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "verify otp",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"naimulislamomit548@gmail.com\",\r\n    \"otp\": \"631479\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/verify-email",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"email\": \"admin@courier.com\",\r\n//     \"password\": \"Admin@123456\"\r\n// }\r\n// {\r\n//     \"email\": \"omitvici@gmail.com\",\r\n//     \"password\": \"Pt!12345\"\r\n// }\r\n\r\n{\r\n    \"email\": \"naimulislamomit2022@gmail.com\",\r\n    \"password\": \"Pt!12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "forgot password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"naimulislamomit548@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reset password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"naimulislamomit548@gmail.com\",\r\n    \"newPassword\": \"Pt!!12345\",\r\n    \"otp\": \"483907\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "upload img",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "uuid": "48a6416f-8b7d-44ba-a543-b2e64d709315",
+                  "src": "/C:/Users/PC/Downloads/WhatsApp Image 2026-08-27 at 6.10.53 PM.jpeg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/user/profile-image",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user dashboard",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "uuid": "48a6416f-8b7d-44ba-a543-b2e64d709315",
+                  "src": "/C:/Users/PC/Downloads/WhatsApp Image 2026-08-27 at 6.10.53 PM.jpeg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/user/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get user my profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "uuid": "48a6416f-8b7d-44ba-a543-b2e64d709315",
+                  "src": "/C:/Users/PC/Downloads/WhatsApp Image 2026-08-27 at 6.10.53 PM.jpeg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/user/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update user profile",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Omit Mia customer\",\r\n  \"phone\": \"017XXXXXXXX\",\r\n  \"bio\": \"Courier service customer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/user/me-update",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "me-update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "hubs",
+      "item": [
+        {
+          "name": "create hub",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@courier.com\",\r\n    \"password\": \"Admin@123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all hubs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get hub by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs/id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs",
+                "id"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get active hubs",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs/active-hubs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs",
+                "active-hubs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update hub",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rajshahi Central Hub\",\r\n  \"code\": \"RAJ-004\",\r\n  \"address\": \"Station Road, Alupatti\",\r\n  \"city\": \"Rajshahi\",\r\n  \"district\": \"Rajshahi\",\r\n  \"latitude\": 24.3745,\r\n  \"longitude\": 88.6042,\r\n  \"status\": \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs/596797cd-73c8-48dc-b51f-73a53e875220",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs",
+                "596797cd-73c8-48dc-b51f-73a53e875220"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete hub",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/hubs/347c6a20-8cdf-4847-b3da-27772fa6a808",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "hubs",
+                "347c6a20-8cdf-4847-b3da-27772fa6a808"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "courier",
+      "item": [
+        {
+          "name": "update availability",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"availabilityStatus\": \"AVAILABLE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/couriers/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "couriers",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "dashboard",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"availabilityStatus\": \"AVAILABLE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/couriers/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "couriers",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "accept assignment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"availabilityStatus\": \"AVAILABLE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/couriers/assignments/:id/accept",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "couriers",
+                "assignments",
+                ":id",
+                "accept"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reject assignment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"reason\": \"Vehicle problem\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/couriers/assignments/:id/reject",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "couriers",
+                "assignments",
+                ":id",
+                "reject"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "complete assignment",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"availabilityStatus\": \"AVAILABLE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/couriers/assignments/:id/complete",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "couriers",
+                "assignments",
+                ":id",
+                "complete"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "shipment",
+      "item": [
+        {
+          "name": "create shipment as customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"senderAddress\": {\r\n    \"label\": \"Banani Residence\",\r\n    \"contactName\": \"Nusrat Jahan\",\r\n    \"phone\": \"01311223344\",\r\n    \"addressLine\": \"House 12, Road 11, Banani\",\r\n    \"city\": \"Dhaka\",\r\n    \"district\": \"Dhaka\",\r\n    \"postalCode\": \"1213\",\r\n    \"latitude\": 23.794,\r\n    \"longitude\": 90.4043,\r\n    \"isDefault\": true\r\n  },\r\n  \"receiverAddress\": {\r\n    \"label\": \"Agrabad Corporate Hub\",\r\n    \"contactName\": \"Tanvir Hasan\",\r\n    \"phone\": \"01411223344\",\r\n    \"addressLine\": \"Level 4, Chamber Building, Agrabad C/A\",\r\n    \"city\": \"Chittagong\",\r\n    \"district\": \"Chittagong\",\r\n    \"postalCode\": \"4100\",\r\n    \"latitude\": 22.3314,\r\n    \"longitude\": 91.8174,\r\n    \"isDefault\": false\r\n  },\r\n  \"originHubId\": \"02f3595d-1b89-4536-bca0-d6623bbb7237\",\r\n  \"destinationHubId\": \"347c6a20-8cdf-4847-b3da-27772fa6a808\",\r\n  \"serviceType\": \"STANDARD\",\r\n  \"packageType\": \"FRAGILE\",\r\n  \"weight\": 3.2,\r\n  \"pickupDate\": \"2026-09-06T11:00:00.000Z\",\r\n  \"estimatedDeliveryDate\": \"2026-09-08T15:00:00.000Z\",\r\n  \"items\": [\r\n    {\r\n      \"name\": \"Commercial Kitchen Blender\",\r\n      \"description\": \"Heavy-duty glass jar mixer unit\",\r\n      \"quantity\": 1,\r\n      \"weight\": 3.2,\r\n      \"declaredValue\": 8500\r\n    }\r\n  ]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all shipment by admin",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"senderAddress\": {\r\n    \"label\": \"Mymensingh Home\",\r\n    \"contactName\": \"Tariqul Islam\",\r\n    \"phone\": \"01911223344\",\r\n    \"addressLine\": \"House 45, Road 2, Akua\",\r\n    \"city\": \"Mymensingh\",\r\n    \"district\": \"Mymensingh\",\r\n    \"postalCode\": \"2200\",\r\n    \"latitude\": 24.7471,\r\n    \"longitude\": 90.4203,\r\n    \"isDefault\": false\r\n  },\r\n  \"receiverAddress\": {\r\n    \"label\": \"Chittagong Outlet\",\r\n    \"contactName\": \"Asif Rahman\",\r\n    \"phone\": \"01511223344\",\r\n    \"addressLine\": \"Shop 12, GEC Circle\",\r\n    \"city\": \"Chittagong\",\r\n    \"district\": \"Chittagong\",\r\n    \"postalCode\": \"4000\",\r\n    \"latitude\": 22.3569,\r\n    \"longitude\": 91.8122,\r\n    \"isDefault\": true\r\n  },\r\n  \"originHubId\": \"c611d12f-fd3a-410d-bc7c-b8f98a268cc7\",\r\n  \"destinationHubId\": \"df52d6c0-9736-4826-aabe-f89695dd2b5d\",\r\n  \"serviceType\": \"EXPRESS\",\r\n  \"packageType\": \"ELECTRONICS\",\r\n  \"weight\": 5.8,\r\n  \"pickupDate\": \"2026-09-05T09:00:00.000Z\",\r\n  \"estimatedDeliveryDate\": \"2026-09-06T18:00:00.000Z\",\r\n  \"items\": [\r\n    {\r\n      \"name\": \"Sony 4K Monitor\",\r\n      \"description\": \"Fragile electronic display unit\",\r\n      \"quantity\": 1,\r\n      \"weight\": 5.8,\r\n      \"declaredValue\": 45000\r\n    }\r\n  ]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments?serviceType=STANDARD&searchTerm=CR",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "type": "text"
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all shipment by customer own",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments/my-shipments?packageType=PARCEL",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "my-shipments"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL"
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get shipment by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments/533e61ff-83bf-4e7c-9294-8b57aa6c0691",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "533e61ff-83bf-4e7c-9294-8b57aa6c0691"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "cancel shimpment by customer",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments/cancel/848d0608-af5f-45c3-b717-059f791ce6f5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "cancel",
+                "848d0608-af5f-45c3-b717-059f791ce6f5"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update shipment status by admin and courier",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"PICKED_UP\",\r\n  \"note\": \"Package picked up from customer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments/status/848d0608-af5f-45c3-b717-059f791ce6f5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "status",
+                "848d0608-af5f-45c3-b717-059f791ce6f5"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Courier by admin",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"PICKED_UP\",\r\n  \"note\": \"Package picked up from customer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/shipments/assign-courier/848d0608-af5f-45c3-b717-059f791ce6f5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "assign-courier",
+                "848d0608-af5f-45c3-b717-059f791ce6f5"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "item": [
+        {
+          "name": "pending courier",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/courier-pending",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "courier-pending"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all couriers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/couriers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "couriers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get courier by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admi/courier/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admi",
+                "courier",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "approve couriers",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admi/approve/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admi",
+                "approve",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "reject couriers",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/reject/752870d0-f2ae-41f7-9004-9730ca901ba8",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "reject",
+                "752870d0-f2ae-41f7-9004-9730ca901ba8"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get customer by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/users/1d5cac9b-34e3-4bd8-b402-583fee5ba44c",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users",
+                "1d5cac9b-34e3-4bd8-b402-583fee5ba44c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update customer status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"ACTIVE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/users/1d5cac9b-34e3-4bd8-b402-583fee5ba44c/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users",
+                "1d5cac9b-34e3-4bd8-b402-583fee5ba44c",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "tracking",
+      "item": [
+        {
+          "name": "get shipment by tracking num",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracking/CR-1788541203146-3F253C",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracking",
+                "CR-1788541203146-3F253C"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get shipment tracking-history by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tracking/tracking-history/533e61ff-83bf-4e7c-9294-8b57aa6c0691",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tracking",
+                "tracking-history",
+                "533e61ff-83bf-4e7c-9294-8b57aa6c0691"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PAYMENT_PENDING",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceType",
+                  "value": "STANDARD",
+                  "disabled": true
+                },
+                {
+                  "key": "packageType",
+                  "value": "PARCEL",
+                  "type": "text",
+                  "disabled": true
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "CR",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "payment",
+      "item": [
+        {
+          "name": "create payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/payment/create",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "payment",
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get my payment",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"email\": \"admin@courier.com\",\r\n//     \"password\": \"Admin@123456\"\r\n// }\r\n// {\r\n//     \"email\": \"omitvici@gmail.com\",\r\n//     \"password\": \"Pt!12345\"\r\n// }\r\n\r\n{\r\n    \"email\": \"naimulislamomit2022@gmail.com\",\r\n    \"password\": \"Pt!12345\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/payment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "payment"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get my payment by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// {\r\n//     \"email\": \"admin@courier.com\",\r\n//     \"password\": \"Admin@123456\"\r\n// }\r\n// {\r\n//     \"email\": \"omitvici@gmail.com\",\r\n//     \"password\": \"Pt!12345\"\r\n// }\r\n\r\n{\r\n    \"email\": \"naimulislamomit2022@gmail.com\",\r\n    \"password\": \"Pt!12345\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/payment/id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "payment",
+                "id"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "reviews",
+      "item": [
+        {
+          "name": "post reviews",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"shipmentId\": \"54d772af-fbbe-4b9f-a1d4-321e9cb92604\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Very fast and professional delivery.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/reviews",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get reviews",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"shipmentId\": \"54d772af-fbbe-4b9f-a1d4-321e9cb92604\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Very fast and professional delivery.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/reviews/courier/7bc5ba1f-d374-4b38-a3f2-f436b03bcbe3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "reviews",
+                "courier",
+                "7bc5ba1f-d374-4b38-a3f2-f436b03bcbe3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
