@@ -1,0 +1,88 @@
+enum Role {
+  CUSTOMER
+  COURIER
+  ADMIN
+}
+
+enum AuthProvider {
+  CREDENTIALS
+  GOOGLE
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BLOCKED
+}
+
+enum CourierAvailability {
+  AVAILABLE
+  BUSY
+  OFFLINE
+  SUSPENDED
+}
+
+enum HubStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum ServiceType {
+  STANDARD
+  EXPRESS
+}
+
+enum PackageType {
+  DOCUMENT
+  PARCEL
+  FRAGILE
+  ELECTRONICS
+  OTHER
+}
+
+enum ShipmentStatus {
+  CREATED
+  PAYMENT_PENDING
+  CONFIRMED
+  PICKUP_SCHEDULED
+  COURIER_ASSIGNED
+  PICKED_UP
+  AT_ORIGIN_HUB
+  IN_TRANSIT
+  AT_DESTINATION_HUB
+  OUT_FOR_DELIVERY
+  DELIVERY_FAILED
+  RETURN_TO_SENDER
+  RETURNED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentGateway {
+  STRIPE
+  BKASH
+  SSLCOMMERZ
+}
+
+enum AssignmentStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum CourierApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

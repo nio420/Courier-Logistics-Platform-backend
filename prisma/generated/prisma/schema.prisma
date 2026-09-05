@@ -1,0 +1,443 @@
+model Address {
+  id          String   @id @default(uuid())
+  userId      String
+  label       String
+  contactName String
+  phone       String
+  addressLine String
+  city        String
+  district    String
+  postalCode  String
+  latitude    Decimal?
+  longitude   Decimal?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  senderShipments   Shipment[] @relation("SenderAddress")
+  receiverShipments Shipment[] @relation("ReceiverAddress")
+
+  @@index([userId])
+  @@index([district])
+  @@index([city])
+  @@map("addresses")
+}
+
+model CourierAssignment {
+  id         String @id @default(uuid())
+  shipmentId String
+  courierId  String
+  assignedBy String
+
+  status AssignmentStatus @default(PENDING)
+
+  assignedAt      DateTime  @default(now())
+  acceptedAt      DateTime?
+  rejectedAt      DateTime?
+  completedAt     DateTime?
+  rejectionReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  courier User @relation("AssignedCourier", fields: [courierId], references: [id])
+
+  assigner User @relation("AssignmentCreatedBy", fields: [assignedBy], references: [id])
+
+  @@index([shipmentId])
+  @@index([courierId])
+  @@index([status])
+  @@index([courierId, status])
+  @@index([shipmentId, status])
+  @@map("courier_assignments")
+}
+
+model Courier {
+  id                 String              @id @default(uuid())
+  userId             String              @unique
+  employeeId         String              @unique
+  vehicleType        String?
+  vehicleNumber      String?             @unique
+  licenseNumber      String?             @unique
+  availabilityStatus CourierAvailability @default(OFFLINE)
+  currentLat         Decimal?
+  currentLng         Decimal?
+  totalDeliveries    Int                 @default(0)
+  totalEarnings      Decimal             @default(0)
+  rating             Decimal             @default(0)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([availabilityStatus])
+  @@map("couriers")
+}
+
+enum Role {
+  CUSTOMER
+  COURIER
+  ADMIN
+}
+
+enum AuthProvider {
+  CREDENTIALS
+  GOOGLE
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BLOCKED
+}
+
+enum CourierAvailability {
+  AVAILABLE
+  BUSY
+  OFFLINE
+  SUSPENDED
+}
+
+enum HubStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum ServiceType {
+  STANDARD
+  EXPRESS
+}
+
+enum PackageType {
+  DOCUMENT
+  PARCEL
+  FRAGILE
+  ELECTRONICS
+  OTHER
+}
+
+enum ShipmentStatus {
+  CREATED
+  PAYMENT_PENDING
+  CONFIRMED
+  PICKUP_SCHEDULED
+  COURIER_ASSIGNED
+  PICKED_UP
+  AT_ORIGIN_HUB
+  IN_TRANSIT
+  AT_DESTINATION_HUB
+  OUT_FOR_DELIVERY
+  DELIVERY_FAILED
+  RETURN_TO_SENDER
+  RETURNED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentGateway {
+  STRIPE
+  BKASH
+  SSLCOMMERZ
+}
+
+enum AssignmentStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum CourierApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Hub {
+  id        String    @id @default(uuid())
+  name      String
+  code      String    @unique
+  address   String
+  city      String
+  district  String
+  latitude  Decimal?
+  longitude Decimal?
+  status    HubStatus @default(ACTIVE)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Shipments originating from this hub
+  originShipments Shipment[] @relation("OriginHub")
+
+  // Shipments going to this hub
+  destinationShipments Shipment[] @relation("DestinationHub")
+
+  // Shipments currently located at this hub
+  currentShipments Shipment[] @relation("CurrentHub")
+
+  // Tracking events at this hub
+  trackingEvents ShipmentTracking[]
+
+  @@index([city])
+  @@index([district])
+  @@index([status])
+  @@map("hubs")
+}
+
+model Payment {
+  id         String @id @default(uuid())
+  shipmentId String
+  customerId String
+
+  amount   Decimal
+  currency String  @default("BDT")
+
+  gateway          PaymentGateway
+  transactionId    String         @unique
+  gatewayPaymentId String?        @unique
+
+  status          PaymentStatus @default(PENDING)
+  gatewayResponse Json?
+  paidAt          DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id])
+
+  customer User @relation(fields: [customerId], references: [id])
+
+  @@index([shipmentId])
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("payments")
+}
+
+model Review {
+  id         String @id @default(uuid())
+  shipmentId String @unique
+  customerId String
+  courierId  String
+
+  rating  Int
+  comment String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id])
+
+  customer User @relation("CustomerReviews", fields: [customerId], references: [id])
+
+  courier User @relation("CourierReviews", fields: [courierId], references: [id])
+
+  @@index([customerId])
+  @@index([courierId])
+  @@map("reviews")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Shipment {
+  id             String @id @default(uuid())
+  trackingNumber String @unique
+
+  customerId String
+  courierId  String?
+
+  senderAddressId   String
+  receiverAddressId String
+
+  originHubId      String
+  destinationHubId String
+  currentHubId     String?
+
+  serviceType ServiceType
+  packageType PackageType
+  weight      Decimal
+
+  deliveryFee   Decimal
+  paymentStatus PaymentStatus  @default(PENDING)
+  status        ShipmentStatus @default(CREATED)
+
+  pickupDate            DateTime?
+  estimatedDeliveryDate DateTime?
+  deliveredAt           DateTime?
+
+  failureReason   String?
+  proofOfDelivery Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Customer
+  customer User @relation("CustomerShipments", fields: [customerId], references: [id])
+
+  // Assigned courier
+  courier User? @relation("CourierShipments", fields: [courierId], references: [id])
+
+  // Sender address
+  senderAddress Address @relation("SenderAddress", fields: [senderAddressId], references: [id])
+
+  // Receiver address
+  receiverAddress Address @relation("ReceiverAddress", fields: [receiverAddressId], references: [id])
+
+  // Origin hub
+  originHub Hub @relation("OriginHub", fields: [originHubId], references: [id])
+
+  // Destination hub
+  destinationHub Hub @relation("DestinationHub", fields: [destinationHubId], references: [id])
+
+  // Current hub
+  currentHub Hub? @relation("CurrentHub", fields: [currentHubId], references: [id])
+
+  // Shipment items
+  items ShipmentItem[]
+
+  // Tracking history
+  tracking ShipmentTracking[]
+
+  // Assignment history
+  assignments CourierAssignment[]
+
+  // Payments
+  payments Payment[]
+
+  // Customer review
+  review Review?
+
+  @@index([customerId])
+  @@index([courierId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([originHubId])
+  @@index([destinationHubId])
+  @@index([currentHubId])
+  @@index([createdAt])
+  @@index([customerId, status])
+  @@index([courierId, status])
+  @@map("shipments")
+}
+
+model ShipmentItem {
+  id            String   @id @default(uuid())
+  shipmentId    String
+  name          String
+  description   String?
+  quantity      Int
+  weight        Decimal
+  declaredValue Decimal
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([shipmentId])
+  @@map("shipment_items")
+}
+
+model ShipmentTracking {
+  id         String         @id @default(uuid())
+  shipmentId String
+  status     ShipmentStatus
+  hubId      String?
+  courierId  String?
+  updatedBy  String?
+  location   Json?
+  note       String?
+  metadata   Json?
+  createdAt  DateTime       @default(now())
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  hub Hub? @relation(fields: [hubId], references: [id])
+
+  courier User? @relation("TrackingCourier", fields: [courierId], references: [id])
+
+  updater User? @relation("TrackingUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([shipmentId])
+  @@index([createdAt])
+  @@index([status])
+  @@index([shipmentId, createdAt])
+  @@map("shipment_tracking")
+}
+
+model User {
+  id                    String                 @id @default(uuid())
+  name                  String
+  email                 String                 @unique
+  phone                 String?
+  bio                   String?
+  password              String?
+  googleId              String?                @unique
+  authProvider          AuthProvider           @default(CREDENTIALS)
+  emailVerified         Boolean                @default(false)
+  role                  Role                   @default(CUSTOMER)
+  status                UserStatus             @default(ACTIVE)
+  courierApprovalStatus CourierApprovalStatus?
+  needPasswordChange    Boolean                @default(false)
+  profileImage          String                 @default("")
+  imagePublicId         String                 @default("")
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  // One courier profile for users whose role is COURIER
+  courier Courier?
+
+  // User addresses
+  addresses Address[]
+
+  // Shipments created by customer
+  customerShipments Shipment[] @relation("CustomerShipments")
+
+  // Shipments assigned directly to courier
+  courierShipments Shipment[] @relation("CourierShipments")
+
+  // Payments made by customer
+  payments Payment[]
+
+  // Reviews written by customer
+  customerReviews Review[] @relation("CustomerReviews")
+
+  // Reviews received by courier
+  courierReviews Review[] @relation("CourierReviews")
+
+  // Tracking updates made by user
+  trackingUpdates ShipmentTracking[] @relation("TrackingUpdatedBy")
+
+  // Tracking updates associated with courier
+  courierTracking ShipmentTracking[] @relation("TrackingCourier")
+
+  // Courier assignments received
+  courierAssignments CourierAssignment[] @relation("AssignedCourier")
+
+  // Courier assignments created by admin
+  createdAssignments CourierAssignment[] @relation("AssignmentCreatedBy")
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}

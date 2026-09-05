@@ -1,0 +1,26 @@
+model ShipmentTracking {
+  id         String         @id @default(uuid())
+  shipmentId String
+  status     ShipmentStatus
+  hubId      String?
+  courierId  String?
+  updatedBy  String?
+  location   Json?
+  note       String?
+  metadata   Json?
+  createdAt  DateTime       @default(now())
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  hub Hub? @relation(fields: [hubId], references: [id])
+
+  courier User? @relation("TrackingCourier", fields: [courierId], references: [id])
+
+  updater User? @relation("TrackingUpdatedBy", fields: [updatedBy], references: [id])
+
+  @@index([shipmentId])
+  @@index([createdAt])
+  @@index([status])
+  @@index([shipmentId, createdAt])
+  @@map("shipment_tracking")
+}

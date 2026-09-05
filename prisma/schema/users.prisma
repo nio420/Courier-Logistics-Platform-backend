@@ -1,0 +1,56 @@
+model User {
+  id                 String       @id @default(uuid())
+  name               String
+  email              String       @unique
+  phone              String?
+  bio                String?
+  password           String?
+  googleId           String?      @unique
+  authProvider       AuthProvider @default(CREDENTIALS)
+  emailVerified      Boolean      @default(false)
+  role               Role         @default(CUSTOMER)
+  status             UserStatus   @default(ACTIVE)
+  courierApprovalStatus CourierApprovalStatus?
+  needPasswordChange Boolean      @default(false)
+  profileImage       String       @default("")
+  imagePublicId      String       @default("")
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  // One courier profile for users whose role is COURIER
+  courier Courier?
+
+  // User addresses
+  addresses Address[]
+
+  // Shipments created by customer
+  customerShipments Shipment[] @relation("CustomerShipments")
+
+  // Shipments assigned directly to courier
+  courierShipments Shipment[] @relation("CourierShipments")
+
+  // Payments made by customer
+  payments Payment[]
+
+  // Reviews written by customer
+  customerReviews Review[] @relation("CustomerReviews")
+
+  // Reviews received by courier
+  courierReviews Review[] @relation("CourierReviews")
+
+  // Tracking updates made by user
+  trackingUpdates ShipmentTracking[] @relation("TrackingUpdatedBy")
+
+  // Tracking updates associated with courier
+  courierTracking ShipmentTracking[] @relation("TrackingCourier")
+
+  // Courier assignments received
+  courierAssignments CourierAssignment[] @relation("AssignedCourier")
+
+  // Courier assignments created by admin
+  createdAssignments CourierAssignment[] @relation("AssignmentCreatedBy")
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}

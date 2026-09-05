@@ -1,0 +1,22 @@
+model Review {
+  id         String @id @default(uuid())
+  shipmentId String @unique
+  customerId String
+  courierId  String
+
+  rating  Int
+  comment String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id])
+
+  customer User @relation("CustomerReviews", fields: [customerId], references: [id])
+
+  courier User @relation("CourierReviews", fields: [courierId], references: [id])
+
+  @@index([customerId])
+  @@index([courierId])
+  @@map("reviews")
+}

@@ -1,0 +1,80 @@
+model Shipment {
+  id             String @id @default(uuid())
+  trackingNumber String @unique
+
+  customerId String
+  courierId  String?
+
+  senderAddressId   String
+  receiverAddressId String
+
+  originHubId      String
+  destinationHubId String
+  currentHubId     String?
+
+  serviceType ServiceType
+  packageType PackageType
+  weight      Decimal
+
+  deliveryFee   Decimal
+  paymentStatus PaymentStatus  @default(PENDING)
+  status        ShipmentStatus @default(CREATED)
+
+  pickupDate            DateTime?
+  estimatedDeliveryDate DateTime?
+  deliveredAt           DateTime?
+
+  failureReason   String?
+  proofOfDelivery Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Customer
+  customer User @relation("CustomerShipments", fields: [customerId], references: [id])
+
+  // Assigned courier
+  courier User? @relation("CourierShipments", fields: [courierId], references: [id])
+
+  // Sender address
+  senderAddress Address @relation("SenderAddress", fields: [senderAddressId], references: [id])
+
+  // Receiver address
+  receiverAddress Address @relation("ReceiverAddress", fields: [receiverAddressId], references: [id])
+
+  // Origin hub
+  originHub Hub @relation("OriginHub", fields: [originHubId], references: [id])
+
+  // Destination hub
+  destinationHub Hub @relation("DestinationHub", fields: [destinationHubId], references: [id])
+
+  // Current hub
+  currentHub Hub? @relation("CurrentHub", fields: [currentHubId], references: [id])
+
+  // Shipment items
+  items ShipmentItem[]
+
+  // Tracking history
+  tracking ShipmentTracking[]
+
+  // Assignment history
+  assignments CourierAssignment[]
+
+  // Payments
+  payments Payment[]
+
+  // Customer review
+  review Review?
+
+  @@index([customerId])
+  @@index([courierId])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([originHubId])
+  @@index([destinationHubId])
+  @@index([currentHubId])
+  @@index([createdAt])
+  @@index([customerId, status])
+  @@index([courierId, status])
+  @@map("shipments")
+}

@@ -1,0 +1,21 @@
+model Courier {
+  id                 String              @id @default(uuid())
+  userId             String              @unique
+  employeeId         String              @unique
+  vehicleType        String?
+  vehicleNumber      String?             @unique
+  licenseNumber      String?             @unique
+  availabilityStatus CourierAvailability @default(OFFLINE)
+  currentLat         Decimal?
+  currentLng         Decimal?
+  totalDeliveries    Int                 @default(0)
+  totalEarnings      Decimal             @default(0)
+  rating             Decimal             @default(0)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([availabilityStatus])
+  @@map("couriers")
+}

@@ -1,0 +1,29 @@
+model Payment {
+  id         String @id @default(uuid())
+  shipmentId String
+  customerId String
+
+  amount   Decimal
+  currency String  @default("BDT")
+
+  gateway          PaymentGateway
+  transactionId    String         @unique
+  gatewayPaymentId String?        @unique
+
+  status          PaymentStatus @default(PENDING)
+  gatewayResponse Json?
+  paidAt          DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id])
+
+  customer User @relation(fields: [customerId], references: [id])
+
+  @@index([shipmentId])
+  @@index([customerId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("payments")
+}

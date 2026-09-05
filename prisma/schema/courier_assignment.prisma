@@ -1,0 +1,30 @@
+model CourierAssignment {
+  id         String @id @default(uuid())
+  shipmentId String
+  courierId  String
+  assignedBy String
+
+  status AssignmentStatus @default(PENDING)
+
+  assignedAt      DateTime  @default(now())
+  acceptedAt      DateTime?
+  rejectedAt      DateTime?
+  completedAt     DateTime?
+  rejectionReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  courier User @relation("AssignedCourier", fields: [courierId], references: [id])
+
+  assigner User @relation("AssignmentCreatedBy", fields: [assignedBy], references: [id])
+
+  @@index([shipmentId])
+  @@index([courierId])
+  @@index([status])
+  @@index([courierId, status])
+  @@index([shipmentId, status])
+  @@map("courier_assignments")
+}
