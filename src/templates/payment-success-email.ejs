@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Payment Successful</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7fb;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2937;
+      }
+
+      .email-wrapper {
+        width: 100%;
+        padding: 40px 15px;
+        box-sizing: border-box;
+      }
+
+      .email-container {
+        max-width: 620px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      .header {
+        background: linear-gradient(135deg, #111827, #1f2937);
+        padding: 30px 35px;
+        text-align: center;
+      }
+
+      .brand {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+
+      .brand span {
+        color: #22c55e;
+      }
+
+      .header-text {
+        margin: 8px 0 0;
+        color: #cbd5e1;
+        font-size: 13px;
+      }
+
+      .content {
+        padding: 40px 35px;
+      }
+
+      .success-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background-color: #dcfce7;
+        color: #16a34a;
+        font-size: 34px;
+        line-height: 64px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .title {
+        margin: 0;
+        text-align: center;
+        color: #111827;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        margin: 12px auto 30px;
+        max-width: 470px;
+        text-align: center;
+        color: #64748b;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .greeting {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 22px;
+      }
+
+      .payment-card {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        margin: 25px 0;
+      }
+
+      .payment-card-header {
+        padding: 18px 20px;
+        background: #f1f5f9;
+        border-bottom: 1px solid #e2e8f0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #334155;
+      }
+
+      .payment-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 20px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 14px;
+      }
+
+      .payment-row:last-child {
+        border-bottom: none;
+      }
+
+      .label {
+        color: #64748b;
+      }
+
+      .value {
+        color: #111827;
+        font-weight: 600;
+        text-align: right;
+        word-break: break-word;
+      }
+
+      .amount-row {
+        background: #ecfdf5;
+      }
+
+      .amount-row .label,
+      .amount-row .value {
+        color: #15803d;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #15803d;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .message-box {
+        margin: 28px 0;
+        padding: 18px 20px;
+        border-left: 4px solid #22c55e;
+        background: #f0fdf4;
+        border-radius: 8px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .attachment-note {
+        text-align: center;
+        margin: 28px 0 5px;
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .footer {
+        background: #f8fafc;
+        padding: 25px 35px;
+        text-align: center;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .footer-brand {
+        color: #111827;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .footer-text {
+        margin: 0;
+        color: #94a3b8;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .copyright {
+        margin-top: 12px;
+        color: #cbd5e1;
+        font-size: 11px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .email-wrapper {
+          padding: 20px 10px;
+        }
+
+        .header {
+          padding: 25px 20px;
+        }
+
+        .content {
+          padding: 30px 20px;
+        }
+
+        .footer {
+          padding: 22px 20px;
+        }
+
+        .title {
+          font-size: 24px;
+        }
+
+        .payment-row {
+          padding: 13px 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="email-wrapper">
+      ```
+      <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+          <div class="brand">Courier <span>&</span> Logistics</div>
+
+          <p class="header-text">Fast. Reliable. Delivered.</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+          <div class="success-icon">✓</div>
+
+          <h1 class="title">Payment Successful!</h1>
+
+          <p class="subtitle">
+            Your payment has been successfully processed and your shipment is
+            now confirmed.
+          </p>
+
+          <p class="greeting">Hello <strong><%= name %></strong>,</p>
+
+          <p class="greeting">
+            Thank you for choosing <strong>Courier & Logistics</strong>. We have
+            successfully received your payment for the shipment below.
+          </p>
+
+          <!-- Payment Details -->
+          <div class="payment-card">
+            <div class="payment-card-header">📦 Shipment & Payment Details</div>
+
+            <div class="payment-row">
+              <span class="label"> Tracking Number </span>
+
+              <span class="value"> <%= trackingNumber %> </span>
+            </div>
+
+            <div class="payment-row">
+              <span class="label"> Shipment ID </span>
+
+              <span class="value"> <%= shipmentId %> </span>
+            </div>
+
+            <div class="payment-row">
+              <span class="label"> Transaction ID </span>
+
+              <span class="value"> <%= transactionId %> </span>
+            </div>
+
+            <div class="payment-row">
+              <span class="label"> Payment Date </span>
+
+              <span class="value">
+                <%= new Date(paidAt).toLocaleString() %>
+              </span>
+            </div>
+
+            <div class="payment-row">
+              <span class="label"> Payment Status </span>
+
+              <span class="value">
+                <span class="status"> PAID </span>
+              </span>
+            </div>
+
+            <div class="payment-row amount-row">
+              <span class="label"> Amount Paid </span>
+
+              <span class="value">
+                <%= currency %> <%= Number(amount).toFixed(2) %>
+              </span>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="message-box">
+            <strong>What's next?</strong><br />
+
+            Your shipment has been confirmed. You can use your
+            <strong>tracking number</strong> to follow the shipment's progress
+            throughout the delivery process.
+          </div>
+
+          <p class="attachment-note">
+            📄 Your detailed payment invoice is attached to this email as a PDF
+            for your records.
+          </p>
+
+          <p class="attachment-note">
+            If you did not make this payment or believe there is an issue with
+            this transaction, please contact our support team immediately.
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <div class="footer-brand">Courier & Logistics</div>
+
+          <p class="footer-text">
+            Thank you for trusting us with your delivery.
+            <br />
+            We make every delivery count.
+          </p>
+
+          <div class="copyright">
+            © <%= new Date().getFullYear() %> Courier & Logistics Platform. All
+            rights reserved.
+          </div>
+        </div>
+      </div>
+      ```
+    </div>
+  </body>
+</html>
