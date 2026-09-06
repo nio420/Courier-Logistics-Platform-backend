@@ -1,4 +1,4 @@
-# 🚚 Courier & Logistics Platform API
+# 🚚 Courier & Logistics Platform Backend
 
 > **Production-oriented Courier & Logistics Management Backend** built with **Node.js, Express, TypeScript, PostgreSQL, Prisma, Redis, Stripe, Passport.js, JWT, Zod, and Docker-ready architecture.**
 
