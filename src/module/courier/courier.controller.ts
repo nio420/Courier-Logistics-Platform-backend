@@ -85,10 +85,24 @@ const completeAssignment = catchAsync(async (req: Request, res: Response) => {
 	});
 });
 
+const getCourierAssignments = catchAsync(async (req: Request, res: Response) => {
+	const user = req.user as IRequestUser;
+
+	const result = await CourierService.getCourierAssignments(user.userId);
+
+	sendResponse(res, {
+		statusCode: httpStatus.OK,
+		success: true,
+		message: "Assignments retrieved successfully",
+		data: result,
+	});
+});
+
 export const CourierController = {
 	updateCourierAvailability,
 	getCourierDashboard,
 	acceptAssignment,
 	rejectAssignment,
 	completeAssignment,
+	getCourierAssignments,
 };

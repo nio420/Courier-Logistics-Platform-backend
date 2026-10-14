@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Your Email - Resend OTP</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+      font-family:
+        -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto,
+        Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    "
+  >
+    <table
+      role="presentation"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="background-color: #f4f6f9; padding: 40px 16px"
+    >
+      <tr>
+        <td align="center">
+          <table
+            role="presentation"
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            width="100%"
+            style="
+              max-width: 480px;
+              background-color: #ffffff;
+              border-radius: 16px;
+              overflow: hidden;
+              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+              border: 1px solid #eaedf2;
+            "
+          >
+            <!-- Header Accent Banner (Indigo / Primary Blue Gradient) -->
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+                  padding: 36px 24px;
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    background-color: rgba(255, 255, 255, 0.2);
+                    width: 64px;
+                    height: 64px;
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 12px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                  "
+                >
+                  <span style="font-size: 32px; line-height: 1">🔐</span>
+                </div>
+                <h1
+                  style="
+                    color: #ffffff;
+                    margin: 0;
+                    font-size: 22px;
+                    font-weight: 700;
+                    letter-spacing: -0.02em;
+                  "
+                >
+                  Email Verification Code
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Body Content -->
+            <tr>
+              <td style="padding: 32px 28px; text-align: center">
+                <p
+                  style="
+                    margin: 0 0 12px 0;
+                    font-size: 18px;
+                    color: #0f172a;
+                    font-weight: 700;
+                  "
+                >
+                  Hello, <%= typeof name !== 'undefined' ? name : 'User' %> 👋
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    font-size: 14px;
+                    color: #475569;
+                    line-height: 1.6;
+                  "
+                >
+                  We received a request to verify your email address (<strong
+                    style="color: #1e293b"
+                    ><%= email %></strong
+                  >). Use the One-Time Password (OTP) below to complete your
+                  verification:
+                </p>
+
+                <!-- OTP Display Box -->
+                <div
+                  style="
+                    background-color: #f8fafc;
+                    border: 2px dashed #cbd5e1;
+                    border-radius: 12px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                  "
+                >
+                  <span
+                    style="
+                      display: block;
+                      font-size: 11px;
+                      font-weight: 700;
+                      text-transform: uppercase;
+                      letter-spacing: 0.1em;
+                      color: #64748b;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Your Verification Code
+                  </span>
+                  <span
+                    style="
+                      font-family: &quot;Courier New&quot;, Courier, monospace;
+                      font-size: 36px;
+                      font-weight: 800;
+                      color: #1e40af;
+                      letter-spacing: 8px;
+                      display: inline-block;
+                    "
+                  >
+                    <%= otp %>
+                  </span>
+                </div>
+
+                <!-- Expiration Notice -->
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    font-size: 13px;
+                    color: #dc2626;
+                    font-weight: 600;
+                  "
+                >
+                  ⏱️ This OTP will expire in <%= typeof expirationMinutes !==
+                  'undefined' ? expirationMinutes : 5 %> minutes.
+                </p>
+
+                <!-- Security Warning Box -->
+                <div
+                  style="
+                    background-color: #fffbe3;
+                    border: 1px solid #fef08a;
+                    border-radius: 12px;
+                    padding: 14px 18px;
+                    text-align: left;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0 0 4px 0;
+                      font-size: 13px;
+                      font-weight: 700;
+                      color: #854d0e;
+                    "
+                  >
+                    🛡️ Security Tip
+                  </p>
+                  <p
+                    style="
+                      margin: 0;
+                      font-size: 12px;
+                      color: #a16207;
+                      line-height: 1.5;
+                    "
+                  >
+                    Never share this OTP with anyone. Our support team will
+                    never ask for your verification code or password. If you
+                    didn't request this code, please ignore this email.
+                  </p>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  background-color: #f8fafc;
+                  border-top: 1px solid #f1f5f9;
+                  padding: 16px 24px;
+                  text-align: center;
+                "
+              >
+                <p style="margin: 0; font-size: 11px; color: #94a3b8">
+                  © <%= new Date().getFullYear() %> Courier Logistics Platform.
+                  All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -86,17 +86,17 @@ const userEmailVerifyZodSchema = z.object({
 });
 
 const loginUserZodSchema = z.object({
-	email: z.email(),
-	password: z
-		.string()
-		.min(5, "Password must be at least 5 characters")
-		.regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-		.regex(/[a-z]/, "Password must contain at least one lowercase letter")
-		.regex(/[0-9]/, "Password must contain at least one number")
-		.regex(
-			/[^A-Za-z0-9]/,
-			"Password must contain at least one special character",
-		),
+  email: z.string().email("Invalid email address"), // 👈 ফিক্স: z.email() এর পরিবর্তে z.string().email() দিন
+  password: z
+    .string()
+    .min(5, "Password must be at least 5 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(
+      /[^A-Za-z0-9]/,
+      "Password must contain at least one special character",
+    ),
 });
 
 const forgetPasswordZodSchema = z.object({

@@ -13,6 +13,86 @@ import type {
 } from "../courier/courier.interface";
 import type { IAdminUserQuery } from "./admin.interface";
 
+const getOverview = async () => {
+  const now = new Date();
+
+  // Include the current month and previous five months.
+  const months = Array.from({ length: 6 }, (_, index) => {
+    const date = new Date(now.getFullYear(), now.getMonth() - (5 - index), 1);
+
+    return {
+      start: date,
+      end: new Date(date.getFullYear(), date.getMonth() + 1, 1),
+      month: new Intl.DateTimeFormat("en", {
+        month: "short",
+        year: "2-digit",
+      }).format(date),
+    };
+  });
+
+  const [
+    totalUsers,
+    totalCustomers,
+    totalCouriers,
+    totalAdmins,
+    pendingCouriers,
+    approvedCouriers,
+    rejectedCouriers,
+    ...monthlyCounts
+  ] = await Promise.all([
+    prisma.user.count(),
+    prisma.user.count({ where: { role: Role.CUSTOMER } }),
+    prisma.user.count({ where: { role: Role.COURIER } }),
+    prisma.user.count({ where: { role: Role.ADMIN } }),
+    prisma.user.count({
+      where: {
+        role: Role.COURIER,
+        courierApprovalStatus: CourierApprovalStatus.PENDING,
+      },
+    }),
+    prisma.user.count({
+      where: {
+        role: Role.COURIER,
+        courierApprovalStatus: CourierApprovalStatus.APPROVED,
+      },
+    }),
+    prisma.user.count({
+      where: {
+        role: Role.COURIER,
+        courierApprovalStatus: CourierApprovalStatus.REJECTED,
+      },
+    }),
+    ...months.map((month) =>
+      prisma.user.count({
+        where: {
+          createdAt: {
+            gte: month.start,
+            lt: month.end,
+          },
+        },
+      }),
+    ),
+  ]);
+
+  const monthlyRegistrations = months.map((month, index) => ({
+    month: month.month,
+    total: monthlyCounts[index],
+  }));
+
+  return {
+    summary: {
+      totalUsers,
+      totalCustomers,
+      totalCouriers,
+      totalAdmins,
+      pendingCouriers,
+      approvedCouriers,
+      rejectedCouriers,
+    },
+    monthlyRegistrations,
+  };
+};
+
 const getAllUsers = async (query: IAdminUserQuery) => {
   const limit = query.limit ? Number(query.limit) : 10;
   const page = query.page ? Number(query.page) : 1;
@@ -276,6 +356,7 @@ const getAllCouriers = async (query: ICourierQuery) => {
         name: true,
         email: true,
         status: true,
+        emailVerified: true,
         courierApprovalStatus: true,
         profileImage: true,
         createdAt: true,
@@ -492,6 +573,7 @@ const rejectCourier = async (
 };
 
 export const AdminService = {
+  getOverview,
   getAllUsers,
   getUserById,
   updateUserStatus,

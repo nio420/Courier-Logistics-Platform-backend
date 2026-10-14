@@ -24,19 +24,19 @@ import { apiRateLimiter } from "./middleware/rateLimiter";
 const app: Application = express();
 
 app.use(
-	cors({
-		origin: config.frontend_url,
-		credentials: true,
-	}),
+  cors({
+    origin: config.frontend_url,
+    credentials: true,
+  }),
 );
 
 app.use(helmet());
 
 // webhook
 app.post(
-	"/api/v1/payments/webhook",
-	express.raw({ type: "application/json" }),
-	PaymentController.confirmPayment,
+  "/api/v1/payments/webhook",
+  express.raw({ type: "application/json" }),
+  PaymentController.confirmPayment,
 );
 
 // Enable URL-encoded form data parsing
@@ -61,11 +61,11 @@ app.use("/api/v1/reviews", ReviewRoutes);
 
 // Basic route
 app.get("/", (_req, res) => {
-	res.status(httpStatus.OK).json({
-		success: true,
-		message: "Welcome to the Courier Logistics Platform API",
-		data: null,
-	});
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Welcome to the Courier Logistics Platform API",
+    data: null,
+  });
 });
 
 app.use(globalErrorHandler);

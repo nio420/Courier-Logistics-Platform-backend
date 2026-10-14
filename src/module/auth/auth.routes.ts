@@ -11,59 +11,65 @@ import { authRateLimiter } from "../../middleware/rateLimiter";
 const router = Router();
 
 router.post(
-	"/register",
-	authRateLimiter,
-	validateRequest(userValidation.registerZodSchema),
-	AuthController.registerUser,
+  "/register",
+  authRateLimiter,
+  validateRequest(userValidation.registerZodSchema),
+  AuthController.registerUser,
 );
 
 router.post(
-	"/verify-email",
-	authRateLimiter,
-	validateRequest(userValidation.userEmailVerifyZodSchema),
-	AuthController.verifyEmail,
-);
-router.post(
-	"/login",
-	authRateLimiter,
-	validateRequest(userValidation.loginUserZodSchema),
-	AuthController.loginUser,
-);
-router.get(
-	"/me",
-	auth(Role.CUSTOMER, Role.COURIER, Role.ADMIN),
-	AuthController.getMe,
-);
-router.post(
-	"/forgot-password",
-	authRateLimiter,
-	validateRequest(userValidation.forgetPasswordZodSchema),
-	AuthController.forgotPassword,
+  "/verify-email",
+  authRateLimiter,
+  validateRequest(userValidation.userEmailVerifyZodSchema),
+  AuthController.verifyEmail,
 );
 
+router.post("/resend-otp", AuthController.resendOtp);
+
 router.post(
-	"/reset-password",
-	authRateLimiter,
-	validateRequest(userValidation.resetPasswordZodSchema),
-	AuthController.resetPassword,
+  "/login",
+  authRateLimiter,
+  validateRequest(userValidation.loginUserZodSchema),
+  AuthController.loginUser,
 );
+
+router.post("/logout", AuthController.logoutUser);
 
 router.get(
-	"/google",
-	passport.authenticate("google", {
-		scope: ["profile", "email"],
-		prompt: "consent select_account",
-		session: false,
-	}),
+  "/me",
+  auth(Role.CUSTOMER, Role.COURIER, Role.ADMIN),
+  AuthController.getMe,
+);
+router.post(
+  "/forgot-password",
+  authRateLimiter,
+  validateRequest(userValidation.forgetPasswordZodSchema),
+  AuthController.forgotPassword,
+);
+
+router.post(
+  "/reset-password",
+  authRateLimiter,
+  validateRequest(userValidation.resetPasswordZodSchema),
+  AuthController.resetPassword,
 );
 
 router.get(
-	"/google/callback",
-	passport.authenticate("google", {
-		session: false,
-		failureRedirect: `${config.frontend_url}/login`,
-	}),
-	AuthController.googleCallback,
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    prompt: "consent select_account",
+    session: false,
+  }),
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: `${config.frontend_url}/login`,
+  }),
+  AuthController.googleCallback,
 );
 
 export const AuthRoutes = router;

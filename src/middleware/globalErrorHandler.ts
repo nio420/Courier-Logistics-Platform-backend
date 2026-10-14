@@ -54,12 +54,12 @@ export const globalErrorHandler = async (
 		success: false,
 		statusCode: statusCode || httpStatus.INTERNAL_SERVER_ERROR,
 		name:
-			config.node_env === "development" ? errorName : "Internal Server Error",
+			config.node_env === "production" ? errorName : "Internal Server Error",
 		message:
-			config.node_env === "development"
+			config.node_env === "production"
 				? errorMessage
 				: "Internal Server Error",
-		error: config.node_env === "development" ? err : undefined,
-		stack: config.node_env === "development" ? err.stack : undefined,
+		error: config.node_env === "production" ? err : undefined,
+		stack: config.node_env === "production" ? err.stack : undefined,
 	});
 };
