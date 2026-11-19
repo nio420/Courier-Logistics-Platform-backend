@@ -7,9 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node init && tsx watch src/server.ts",
-    "build": "node init && tsup",
-    "start": "node init && node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:check": "pnpx @biomejs/biome format ./src",
     "format:fix": "pnpx @biomejs/biome format --write ./src",
